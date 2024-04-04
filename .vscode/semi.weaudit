@@ -1,0 +1,273 @@
+{
+  "clientRemote": "https://github.com/foundry-rs/forge-std",
+  "gitRemote": "https://github.com/foundry-rs/forge-std",
+  "gitSha": "38975ab20c952986f13b8b57dc6fa697d0eba87e",
+  "treeEntries": [
+    {
+      "label": "Duplicate declaration",
+      "entryType": 0,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking.sol",
+          "startLine": 25,
+          "endLine": 25,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "Need specific compiler version",
+      "entryType": 0,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 1,
+          "endLine": 1,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "IERC20 does not consider all ERC20 tokens",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 8,
+          "endLine": 8,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "Informational",
+        "difficulty": "Low",
+        "type": "Denial of Service",
+        "description": "If `basicToken` should ever be USDT on ETH or any similar applications, reverts WILL happen, since the functions do not return booleans as per the IERC20 specification.",
+        "exploit": "Unusuable contract due to token not working like it should.",
+        "recommendation": "Short term, do not use this contract for USDT on ETH or similar, be aware of the tokens you'll be setting here.\nLong term, implement generic transfers and approvals that do not depend on return values:\n\n(bool success, bytes memory data) = token.call(abi.encodeWithSelector(IERC20.<FUNCTION>, <LIST OF ARGUMENTS>));\n"
+      }
+    },
+    {
+      "label": "View and PURE functions should be placed AFTER chain modifying functions",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 58,
+          "endLine": 58,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "Low",
+        "difficulty": "Low",
+        "type": "Configuration",
+        "description": "GAS OPTIMIZATION:\nMakes calling chain editing functions slightly cheaper.",
+        "exploit": "",
+        "recommendation": "Most gas efficient structure:\n\nERRORS\nSTATE VARIABLES\nEVENTS\nMODIFIERS\nCONSTRUCTOR\nEXTERNAL / PUBLIC Functions\nINTERNAL / PRIVATE Functions\nEXTERNAL / PUBLIC VIEW / PURE Functions\nINTERNAL / PRIVATE VIEW / PURE Functions\n"
+      }
+    },
+    {
+      "label": "Remove or Comment before submitting to audits",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 185,
+          "endLine": 194,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "High",
+        "difficulty": "Low",
+        "type": "Access Controls",
+        "description": "Although it's marked as could be removed, should definitely be removed as it can be interpreted as an owner backdoor.",
+        "exploit": "Owner stops rewards from happening.",
+        "recommendation": ""
+      }
+    },
+    {
+      "label": "GAS OPTIMIZATION: If statement + revert with custom error, cheaper to deploy.",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 92,
+          "endLine": 95,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "GAS OPTIMIZATION, calculate rewardRate on set to remove unnecessary math operations",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 68,
+          "endLine": 68,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "for readability 1e18 should be declared a CONSTANT",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 82,
+          "endLine": 82,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "Makes code harder to read",
+        "exploit": "",
+        "recommendation": "1e18 is used as a magnifier.\nRecommend setting it in the variables section as:\n`uint256 private constant MAGNIFIER = 1e18;`"
+      }
+    },
+    {
+      "label": "Unnecessary reentrancy block",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 105,
+          "endLine": 105,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "recommend checking for staker.amountStaked == 0 as well to save on additional math",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 74,
+          "endLine": 74,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "Although nonReentrant is in effect, always do Check, Effects, Interactions pattern wherever possible",
+      "entryType": 1,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "src/Staking_1.sol",
+          "startLine": 146,
+          "endLine": 146,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    },
+    {
+      "label": "Duplicate import",
+      "entryType": 0,
+      "author": "semi",
+      "locations": [
+        {
+          "path": "original/_Staking.sol",
+          "startLine": 25,
+          "endLine": 25,
+          "label": "",
+          "description": ""
+        }
+      ],
+      "details": {
+        "severity": "",
+        "difficulty": "",
+        "type": "",
+        "description": "",
+        "exploit": "",
+        "recommendation": "Short term, \nLong term, \n"
+      }
+    }
+  ],
+  "auditedFiles": [],
+  "resolvedEntries": []
+}
